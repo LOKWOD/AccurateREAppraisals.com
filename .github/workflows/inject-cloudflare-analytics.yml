@@ -1,0 +1,33 @@
+name: Inject Cloudflare Web Analytics
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - '**/*.html'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  inject:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Inject analytics into all HTML pages
+        run: node scripts/inject-cloudflare-analytics.mjs
+      - name: Commit updated pages
+        run: |
+          if git diff --quiet; then
+            echo "Analytics already present on all pages."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add '*.html' '**/*.html'
+          git commit -m "Install Cloudflare Web Analytics site-wide"
+          git push
