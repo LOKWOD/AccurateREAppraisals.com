@@ -17,7 +17,7 @@ a{color:inherit}img{max-width:100%;height:auto}.wrap{max-width:var(--max);margin
 .primary-nav a:hover,.primary-nav a[aria-current="page"]{color:var(--gold);border-bottom-color:var(--gold)}
 .request-button{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#fff;text-decoration:none;padding:13px 17px;border-radius:4px;font-size:12px;font-weight:900;letter-spacing:.03em;white-space:nowrap;box-shadow:0 8px 20px rgba(201,154,67,.22);text-transform:uppercase}
 .request-button:hover{filter:brightness(1.04);transform:translateY(-1px)}
-.hero{position:relative;min-height:660px;display:flex;align-items:center;padding:92px 0;background:linear-gradient(90deg,rgba(7,29,55,.97) 0%,rgba(7,29,55,.9) 38%,rgba(7,29,55,.54) 65%,rgba(7,29,55,.24) 100%),url("https://commons.wikimedia.org/wiki/Special:FilePath/New_housing_development%2C_Clay%2C_NY.jpg") center/cover no-repeat;color:#fff;border-bottom:4px solid var(--gold)}
+.hero{position:relative;min-height:660px;display:flex;align-items:center;padding:92px 0;background:linear-gradient(90deg,rgba(7,29,55,.97) 0%,rgba(7,29,55,.9) 38%,rgba(7,29,55,.54) 65%,rgba(7,29,55,.24) 100%),url("/assets/images/central-new-york-homes.jpg") center/cover no-repeat;color:#fff;border-bottom:4px solid var(--gold)}
 .hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,710px) 1fr;gap:52px;align-items:center}.hero-copy{max-width:710px}
 .eyebrow{font-size:12px;letter-spacing:.16em;font-weight:900;color:var(--gold);text-transform:uppercase;margin:0 0 14px}
 .hero .eyebrow,.page-hero .eyebrow,.dark .eyebrow{color:var(--gold2)}
