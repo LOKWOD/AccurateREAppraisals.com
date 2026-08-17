@@ -39,6 +39,8 @@ jobs:
 
       - name: Inject analytics into all HTML pages
         run: node scripts/inject-cloudflare-analytics.mjs
+      - name: Inject website visitor light beacon
+        run: node scripts/inject-visitor-beacon.mjs . accurate-re-appraisals
 
       - name: Verify the homepage performance fix
         run: |
