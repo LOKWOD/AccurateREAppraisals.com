@@ -1,33 +1,41 @@
-name: Inject Cloudflare Web Analytics
+name: Build content and install Cloudflare Web Analytics
 
 on:
   push:
     branches: [main]
-    paths-ignore:
-      - '**/*.html'
   workflow_dispatch:
 
 permissions:
   contents: write
 
+concurrency:
+  group: accurate-site-content
+  cancel-in-progress: true
+
 jobs:
-  inject:
+  build:
+    if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: 20
+      - name: Generate expanded appraisal library
+        run: node scripts/generate-expansion.mjs
       - name: Inject analytics into all HTML pages
         run: node scripts/inject-cloudflare-analytics.mjs
-      - name: Commit updated pages
+      - name: Commit generated and normalized site files
         run: |
           if git diff --quiet; then
-            echo "Analytics already present on all pages."
+            echo "Site content is already current."
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add '*.html' '**/*.html'
-          git commit -m "Install Cloudflare Web Analytics site-wide"
-          git push
+          git add -A
+          git commit -m "Publish expanded Accurate appraisal library"
+          git pull --rebase origin main
+          git push origin HEAD:main
