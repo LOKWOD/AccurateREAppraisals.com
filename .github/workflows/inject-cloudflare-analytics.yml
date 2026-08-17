@@ -24,7 +24,9 @@ jobs:
         with:
           node-version: 20
       - name: Generate expanded appraisal library
-        run: node scripts/generate-expansion.mjs
+        run: |
+          node scripts/generate-expansion.mjs
+          node scripts/generate-expansion-two.mjs
       - name: Inject analytics into all HTML pages
         run: node scripts/inject-cloudflare-analytics.mjs
       - name: Commit generated and normalized site files
@@ -36,6 +38,6 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A
-          git commit -m "Publish expanded Accurate appraisal library"
+          git commit -m "Publish second Accurate appraisal expansion"
           git pull --rebase origin main
           git push origin HEAD:main
