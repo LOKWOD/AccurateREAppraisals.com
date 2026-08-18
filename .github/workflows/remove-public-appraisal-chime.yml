@@ -1,0 +1,44 @@
+name: Remove public appraisal chime
+
+on:
+  push:
+    paths:
+      - .github/workflows/remove-public-appraisal-chime.yml
+
+permissions:
+  contents: write
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Remove browser chime from public pages
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          root = Path('.')
+          pat = re.compile(r'\s*<!-- Appraisal Cash Register Chime -->\s*<script[^>]+src=["\']/?assets/cash-register\.js["\'][^>]*></script>\s*<!-- End Appraisal Cash Register Chime -->\s*', re.I)
+          for p in root.rglob('*.html'):
+              text = p.read_text(encoding='utf-8')
+              new = pat.sub('\n', text)
+              if new != text:
+                  p.write_text(new, encoding='utf-8')
+          asset = root / 'assets' / 'cash-register.js'
+          if asset.exists(): asset.unlink()
+          for p in (root / '.github' / 'workflows').glob('*.yml'):
+              if p.name == 'remove-public-appraisal-chime.yml':
+                  continue
+              body = p.read_text(encoding='utf-8', errors='ignore').lower()
+              if 'cash register chime' in body or 'cash-register.js' in body or 'first-interaction appraisal chime' in body:
+                  p.unlink()
+          PY
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git rm -f .github/workflows/remove-public-appraisal-chime.yml
+          git add -A
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Remove public appraisal cash-register sound'
+          git push
