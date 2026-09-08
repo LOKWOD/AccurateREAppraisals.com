@@ -60,9 +60,9 @@ footer{background:var(--navy);color:#d8e0eb}.footer-grid{display:grid;grid-templ
 .footer-bottom a{color:#dfe6ef}
 
 /* Shared brand treatment: matches the Syracuse Appraiser family wordmark. */
-.brand.brand-accurate{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:4px;width:auto;height:auto;min-height:64px;flex:0 0 304px;overflow:visible;color:var(--navy);line-height:1;text-decoration:none}
-.brand-accurate .brand-name{font-size:15px;font-weight:850;letter-spacing:.015em;white-space:nowrap}
-.brand-accurate .brand-name>span{font-size:23px;letter-spacing:.035em}
-.brand-accurate small{color:#796746;font-size:8px;font-weight:800;letter-spacing:.095em;line-height:1.2;text-transform:uppercase}
-@media(max-width:760px){.brand.brand-accurate{flex-basis:245px;min-height:58px}.brand-accurate .brand-name{font-size:12px}.brand-accurate .brand-name>span{font-size:19px}.brand-accurate small{font-size:7px}}
+.brand.brand-accurate{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:4px;width:auto;height:auto;min-height:64px;flex:0 0 304px;overflow:visible;color:#10202b;line-height:1.05;text-decoration:none}
+.brand-accurate .brand-name{font-size:19px;font-weight:850;letter-spacing:.03em;white-space:nowrap}
+.brand-accurate .brand-name>span{color:#167fae;font-size:inherit;letter-spacing:inherit}
+.brand-accurate small{color:#5c6c75;font-size:9px;font-weight:650;letter-spacing:.055em;line-height:1.2;text-transform:uppercase}
+@media(max-width:760px){.brand.brand-accurate{flex-basis:245px;min-height:58px}.brand-accurate .brand-name{font-size:15px}.brand-accurate .brand-name>span{font-size:inherit}.brand-accurate small{font-size:7px}}
 
